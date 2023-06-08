@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   items.forEach(item => {
     item.addEventListener('mousedown', dragStart);
-    item.addEventListener('touchstart', dragStart);
+    item.addEventListener('touchstart', dragStart, { passive: false });
   });
 
   function dragStart(event) {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemId = event.target.id;
 
     if (event.type === 'touchstart') {
-      event.target.addEventListener('touchmove', touchMove);
+      event.target.addEventListener('touchmove', touchMove, { passive: false });
       event.target.addEventListener('touchend', touchEnd);
     } else {
       event.target.addEventListener('mousemove', mouseMove);
