@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get references to the containers and items
+    // Here I am Geting references to the containers and items
     const container1 = document.getElementById('container1');
     const container2 = document.getElementById('container2');
     const items = document.querySelectorAll('#container1 > *');
   
-    // Iterate over the items and add necessary event listeners
+    // Here I am Iterating over the items and add necessary event listeners
     items.forEach(item => {
       item.addEventListener('dragstart', dragStart);
     });
   
-    // Event listener functions
+    // Here I am adding Event listener functions
     function dragStart(event) {
-      // Set the data to be transferred during drag
+      // Here I am Seting the data to be transferred during drag
       event.dataTransfer.setData('text/plain', event.target.id);
   
-      // Add the "dragging" class to the dragged item
+      // Here I am Adding the "dragging" class to the dragged item
       event.target.classList.add('dragging');
     }
   
@@ -28,17 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function drop(event) {
       event.preventDefault();
   
-      // Get the dragged item's ID
+      // Here I am Geting the dragged item's ID
       const itemId = event.dataTransfer.getData('text/plain');
   
-      // Append the dragged item to the second container
+      // Here I am Appending the dragged item to the second container
       const item = document.getElementById(itemId);
       container2.appendChild(item);
   
-      // Display a success message
+      // Here I am Displaying a success message
       showMessage('Shifting Successful');
   
-      // Remove the "dragging" class from the dragged item
+      // Here I am Removing the "dragging" class from the dragged item
       item.classList.remove('dragging');
     }
   
@@ -46,16 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
     resetButton.addEventListener('click', resetContainers);
   
     function resetContainers() {
-      // Move all items back to the first container
+      // Here I am Moving all items back to the first container
       items.forEach(item => {
         container1.appendChild(item);
       });
   
-      // Clear the second container
+      // Here I am Clearing the second container
       container2.innerHTML = '';
     }
   
-    // Function to show the message
+    // This Function is to show the message
     function showMessage(text) {
       alert(text);
     }
