@@ -1,63 +1,87 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Here I am Geting references to the containers and items
-    const container1 = document.getElementById('container1');
-    const container2 = document.getElementById('container2');
-    const items = document.querySelectorAll('#container1 > *');
-  
-    // Here I am Iterating over the items and add necessary event listeners
-    items.forEach(item => {
-      item.addEventListener('dragstart', dragStart);
-    });
-  
-    // Here I am adding Event listener functions
-    function dragStart(event) {
-      // Here I am Seting the data to be transferred during drag
-      event.dataTransfer.setData('text/plain', event.target.id);
-  
-      // Here I am Adding the "dragging" class to the dragged item
-      event.target.classList.add('dragging');
-    }
-  
-    container2.addEventListener('dragover', dragOver);
-    container2.addEventListener('drop', drop);
-  
-    function dragOver(event) {
-      event.preventDefault();
-    }
-  
-    function drop(event) {
-      event.preventDefault();
-  
-      // Here I am Geting the dragged item's ID
-      const itemId = event.dataTransfer.getData('text/plain');
-  
-      // Here I am Appending the dragged item to the second container
-      const item = document.getElementById(itemId);
-      container2.appendChild(item);
-  
-      // Here I am Displaying a success message
-      showMessage('Shifting Successful');
-  
-      // Here I am Removing the "dragging" class from the dragged item
-      item.classList.remove('dragging');
-    }
-  
-    const resetButton = document.getElementById('resetButton');
-    resetButton.addEventListener('click', resetContainers);
-  
-    function resetContainers() {
-      // Here I am Moving all items back to the first container
-      items.forEach(item => {
-        container1.appendChild(item);
-      });
-  
-      // Here I am Clearing the second container
-      container2.innerHTML = '';
-    }
-  
-    // This Function is to show the message
-    function showMessage(text) {
-      alert(text);
-    }
+  const container1 = document.getElementById('container1');
+  const container2 = document.getElementById('container2');
+  const items = document.querySelectorAll('#container1 > *');
+
+  items.forEach(item => {
+    item.addEventListener('mousedown', dragStart);
+    item.addEventListener('touchstart', dragStart);
   });
-  
+
+  function dragStart(event) {
+    event.preventDefault();
+
+    const itemId = event.target.id;
+
+    if (event.type === 'touchstart') {
+      event.target.addEventListener('touchmove', touchMove);
+      event.target.addEventListener('touchend', touchEnd);
+    } else {
+      event.target.addEventListener('mousemove', mouseMove);
+      event.target.addEventListener('mouseup', mouseUp);
+    }
+
+    event.dataTransfer.setData('text/plain', itemId);
+    event.target.classList.add('dragging');
+  }
+
+  function mouseMove(event) {
+    event.preventDefault();
+  }
+
+  function touchMove(event) {
+    event.preventDefault();
+  }
+
+  function mouseUp(event) {
+    const itemId = event.target.id;
+    const item = document.getElementById(itemId);
+
+    container2.appendChild(item);
+    item.classList.remove('dragging');
+
+    showMessage('Shifting Successful');
+
+    event.target.removeEventListener('mousemove', mouseMove);
+    event.target.removeEventListener('mouseup', mouseUp);
+  }
+
+  function touchEnd(event) {
+    const itemId = event.target.id;
+    const item = document.getElementById(itemId);
+
+    container2.appendChild(item);
+    item.classList.remove('dragging');
+
+    showMessage('Shifting Successful');
+
+    event.target.removeEventListener('touchmove', touchMove);
+    event.target.removeEventListener('touchend', touchEnd);
+  }
+
+  container2.addEventListener('dragover', dragOver);
+  container2.addEventListener('drop', drop);
+
+  function dragOver(event) {
+    event.preventDefault();
+  }
+
+  function drop(event) {
+    event.preventDefault();
+  }
+
+  const resetButton = document.getElementById('resetButton');
+  resetButton.addEventListener('click', resetContainers);
+
+  function resetContainers() {
+    items.forEach(item => {
+      container1.appendChild(item);
+    });
+
+    container2.innerHTML = '';
+  }
+
+  function showMessage(text) {
+    alert(text);
+  }
+});
