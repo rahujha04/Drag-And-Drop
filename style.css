@@ -1,0 +1,93 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f1ea;
+  }
+  
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 800px;
+    max-width: 90%;
+  }
+  
+  #container1 {
+    flex: 1;
+    height: 400px;
+    background-color: #e8eef5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+  
+  #container1 img {
+    margin-bottom: 20px;
+    width: 120px;
+    height: 120px;
+    cursor: move;
+  }
+  
+  #container1 img.dragging {
+    border: 2px dashed #4C43CD;
+  }
+  
+  #container2 {
+    flex: 1;
+    height: 400px;
+    background-color: #f5e3d1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+  
+  #container2 img {
+    margin-bottom: 20px;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .button-container {
+    margin-top: 20px; /* Add margin to create space between containers and button */
+  }
+  
+  .button {
+    color: #fff;
+    padding: 15px 25px;
+    background-color: #38D2D2;
+    background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 66% at 26% 20%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: inset -3px -3px 9px rgba(255, 255, 255, 0.25), inset 0px 3px 9px rgba(255, 255, 255, 0.3), inset 0px 1px 1px rgba(255, 255, 255, 0.6), inset 0px -8px 36px rgba(0, 0, 0, 0.3), inset 0px 1px 5px rgba(255, 255, 255, 0.6), 2px 19px 31px rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    user-select: none;
+    touch-action: manipulation;
+    cursor: pointer;
+  }
+  
+  #message {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #4C43CD;
+    display: none;
+  }
+  
